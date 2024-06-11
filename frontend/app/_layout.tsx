@@ -5,9 +5,14 @@ import { Theme, ThemeProvider } from '@react-navigation/native';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 
+import { Button } from '~/components/ui/button';
+import { Separator } from '~/components/ui/separator';
 import { NAV_THEME } from '~/lib/constants';
+import { ArrowLeft } from '~/lib/icons/ArrowLeft';
+import { Bell } from '~/lib/icons/Bell';
+import { User } from '~/lib/icons/User';
 import { useColorScheme } from '~/lib/useColorScheme';
 
 const LIGHT_THEME: Theme = {
@@ -21,7 +26,7 @@ const DARK_THEME: Theme = {
 
 export {
   // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
+  ErrorBoundary
 } from 'expo-router';
 
 // Prevent the splash screen from auto-hiding before getting the color scheme.
@@ -43,6 +48,7 @@ export default function RootLayout() {
         setIsColorSchemeLoaded(true);
         return;
       }
+      console.log(theme);
       const colorTheme = theme === 'dark' ? 'dark' : 'light';
       if (colorTheme !== colorScheme) {
         setColorScheme(colorTheme);
@@ -63,7 +69,32 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <Stack />
+      <Stack
+        screenOptions={{
+          header: (props) => {
+            return (
+              <View className="flex flex-col gap-2">
+                <View className="flex flex-row mt-20 bg-transparent space-y-1 justify-between">
+                  <View className="flex flex-row gap-2 pl-2 h-7">
+                    <Button variant="secondary" className="w-[45px] h-1.5 rounded-full">
+                      <ArrowLeft />
+                    </Button>
+                  </View>
+                  <View className="flex flex-row gap-2 pr-2">
+                    <Button variant="secondary" className="w-[45px] h-1.5 rounded-full">
+                      <Bell />
+                    </Button>
+                    <Button variant="secondary" className="w-[45px] h-1.5 rounded-full">
+                      <User />
+                    </Button>
+                  </View>
+                </View>
+                <Separator />
+              </View>
+            );
+          },
+        }}
+      />
     </ThemeProvider>
   );
 }
