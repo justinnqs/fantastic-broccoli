@@ -1,7 +1,8 @@
 import * as React from 'react';
+
 import * as TablePrimitive from '~/components/primitives/table';
-import { cn } from '~/lib/utils';
 import { TextClassContext } from '~/components/ui/text';
+import { cn } from '~/lib/utils';
 
 const Table = React.forwardRef<
   React.ElementRef<typeof TablePrimitive.Root>,
@@ -33,7 +34,7 @@ const TableBody = React.forwardRef<
 >(({ className, style, ...props }, ref) => (
   <TablePrimitive.Body
     ref={ref}
-    className={cn('flex border-border [&_tr:last-child]:border-0', className)}
+    className={cn('flex-1 border-border [&_tr:last-child]:border-0', className)}
     style={[{ minHeight: 2 }, style]}
     {...props}
   />
@@ -59,7 +60,7 @@ const TableRow = React.forwardRef<
   <TablePrimitive.Row
     ref={ref}
     className={cn(
-      'flex-row border-border border-b web:transition-colors web:hover:bg-muted/50 web:data-[state=selected]:bg-muted',
+      'flex-row border-b border-border web:transition-colors web:hover:bg-muted/50 web:data-[state=selected]:bg-muted',
       className
     )}
     {...props}
@@ -71,11 +72,11 @@ const TableHead = React.forwardRef<
   React.ElementRef<typeof TablePrimitive.Head>,
   React.ComponentPropsWithoutRef<typeof TablePrimitive.Head>
 >(({ className, ...props }, ref) => (
-  <TextClassContext.Provider value='text-muted-foreground'>
+  <TextClassContext.Provider value="text-muted-foreground">
     <TablePrimitive.Head
       ref={ref}
       className={cn(
-        'h-12 px-4 text-left justify-center font-medium [&:has([role=checkbox])]:pr-0',
+        'h-12 justify-center px-4 text-left font-medium [&:has([role=checkbox])]:pr-0',
         className
       )}
       {...props}

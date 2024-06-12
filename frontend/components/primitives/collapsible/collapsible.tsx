@@ -1,3 +1,8 @@
+import * as React from 'react';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
+
+import type { CollapsibleContentProps, CollapsibleRootProps, RootContext } from './types';
+
 import { useControllableState } from '~/components/primitives/hooks';
 import * as Slot from '~/components/primitives/slot';
 import type {
@@ -6,9 +11,6 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '~/components/primitives/types';
-import * as React from 'react';
-import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import type { CollapsibleContentProps, CollapsibleRootProps, RootContext } from './types';
 
 const CollapsibleContext = React.createContext<(RootContext & { nativeID: string }) | null>(null);
 
@@ -39,8 +41,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps
           open,
           onOpenChange,
           nativeID,
-        }}
-      >
+        }}>
         <Component ref={ref} {...viewProps} />
       </CollapsibleContext.Provider>
     );
@@ -76,7 +77,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
         ref={ref}
         nativeID={nativeID}
         aria-disabled={(disabled || disabledProp) ?? undefined}
-        role='button'
+        role="button"
         onPress={onPress}
         accessibilityState={{
           expanded: open,
@@ -107,7 +108,7 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleConten
         ref={ref}
         aria-hidden={!(forceMount || open)}
         aria-labelledby={nativeID}
-        role={'region'}
+        role="region"
         {...props}
       />
     );

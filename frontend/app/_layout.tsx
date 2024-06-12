@@ -26,7 +26,7 @@ const DARK_THEME: Theme = {
 
 export {
   // Catch any errors thrown by the Layout component.
-  ErrorBoundary
+  ErrorBoundary,
 } from 'expo-router';
 
 // Prevent the splash screen from auto-hiding before getting the color scheme.
@@ -74,17 +74,17 @@ export default function RootLayout() {
           header: (props) => {
             return (
               <View className="flex flex-col gap-2">
-                <View className="flex flex-row mt-20 bg-transparent space-y-1 justify-between">
-                  <View className="flex flex-row gap-2 pl-2 h-7">
-                    <Button variant="secondary" className="w-[45px] h-1.5 rounded-full">
+                <View className="mt-20 flex flex-row justify-between space-y-1 bg-transparent">
+                  <View className="flex h-7 flex-row gap-2 pl-2">
+                    <Button variant="secondary" className="h-1.5 w-[45px] rounded-full">
                       <ArrowLeft />
                     </Button>
                   </View>
                   <View className="flex flex-row gap-2 pr-2">
-                    <Button variant="secondary" className="w-[45px] h-1.5 rounded-full">
+                    <Button variant="secondary" className="h-1.5 w-[45px] rounded-full">
                       <Bell />
                     </Button>
-                    <Button variant="secondary" className="w-[45px] h-1.5 rounded-full">
+                    <Button variant="secondary" className="h-1.5 w-[45px] rounded-full">
                       <User />
                     </Button>
                   </View>

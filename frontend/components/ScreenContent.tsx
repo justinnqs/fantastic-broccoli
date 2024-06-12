@@ -3,7 +3,8 @@ import { ScrollView, View } from 'react-native';
 import { AllergenView } from './AllergenView';
 import { Separator } from './ui/separator';
 import { H1 } from './ui/typography';
-import {Calendar} from "~/components/Calendar";
+
+import { Calendar } from '~/components/Calendar';
 
 type ScreenContentProps = {
   title: string;

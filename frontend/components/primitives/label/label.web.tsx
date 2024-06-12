@@ -1,4 +1,9 @@
 import * as Label from '@radix-ui/react-label';
+import * as React from 'react';
+import { Text as RNText } from 'react-native';
+
+import type { LabelRootProps, LabelTextProps } from './types';
+
 import * as Slot from '~/components/primitives/slot';
 import type {
   PressableRef,
@@ -6,9 +11,6 @@ import type {
   SlottableTextProps,
   TextRef,
 } from '~/components/primitives/types';
-import * as React from 'react';
-import { Text as RNText } from 'react-native';
-import type { LabelRootProps, LabelTextProps } from './types';
 
 const Root = React.forwardRef<
   PressableRef,

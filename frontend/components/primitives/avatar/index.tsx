@@ -6,9 +6,15 @@ import {
   Image as RNImage,
   View,
 } from 'react-native';
-import * as Slot from '~/components/primitives/slot';
-import { ComponentPropsWithAsChild, SlottableViewProps, ViewRef } from '~/components/primitives/types';
+
 import { AvatarImageProps, AvatarRootProps } from './types';
+
+import * as Slot from '~/components/primitives/slot';
+import {
+  ComponentPropsWithAsChild,
+  SlottableViewProps,
+  ViewRef,
+} from '~/components/primitives/types';
 
 type AvatarState = 'loading' | 'error' | 'loaded';
 
@@ -87,7 +93,7 @@ const Fallback = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...pr
     return null;
   }
   const Component = asChild ? Slot.View : View;
-  return <Component ref={ref} role={'img'} aria-label={alt} {...props} />;
+  return <Component ref={ref} role="img" aria-label={alt} {...props} />;
 });
 
 Fallback.displayName = 'FallbackAvatar';

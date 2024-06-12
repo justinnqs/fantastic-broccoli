@@ -1,4 +1,9 @@
 import * as Collapsible from '@radix-ui/react-collapsible';
+import * as React from 'react';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
+
+import type { CollapsibleContentProps, CollapsibleRootProps, RootContext } from './types';
+
 import { useAugmentedRef, useControllableState } from '~/components/primitives/hooks';
 import * as Slot from '~/components/primitives/slot';
 import type {
@@ -7,9 +12,6 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '~/components/primitives/types';
-import * as React from 'react';
-import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import type { CollapsibleContentProps, CollapsibleRootProps, RootContext } from './types';
 
 const CollapsibleContext = React.createContext<RootContext | null>(null);
 
@@ -57,14 +59,12 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & CollapsibleRootProps
           disabled,
           open,
           onOpenChange,
-        }}
-      >
+        }}>
         <Collapsible.Root
           open={open}
           defaultOpen={defaultOpen}
           onOpenChange={onOpenChange}
-          disabled={disabled}
-        >
+          disabled={disabled}>
           <Component ref={ref} {...viewProps} />
         </Collapsible.Root>
       </CollapsibleContext.Provider>
@@ -119,7 +119,7 @@ const Trigger = React.forwardRef<PressableRef, SlottablePressableProps>(
       <Collapsible.Trigger disabled={disabled} asChild>
         <Component
           ref={augmentedRef}
-          role='button'
+          role="button"
           onPress={onPress}
           disabled={disabled}
           {...props}

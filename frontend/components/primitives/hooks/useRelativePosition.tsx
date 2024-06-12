@@ -5,6 +5,7 @@ import {
   type ScaledSize,
   type ViewStyle,
 } from 'react-native';
+
 import type { Insets } from '~/components/primitives/types';
 
 const POSITION_ABSOLUTE: ViewStyle = {

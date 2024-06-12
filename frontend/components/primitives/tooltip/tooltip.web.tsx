@@ -1,4 +1,14 @@
 import * as Tooltip from '@radix-ui/react-tooltip';
+import * as React from 'react';
+import { Pressable, View, type GestureResponderEvent } from 'react-native';
+
+import type {
+  TooltipOverlayProps,
+  TooltipPortalProps,
+  TooltipRootProps,
+  TooltipTriggerRef,
+} from './types';
+
 import { useAugmentedRef } from '~/components/primitives/hooks';
 import * as Slot from '~/components/primitives/slot';
 import type {
@@ -8,14 +18,6 @@ import type {
   SlottableViewProps,
   ViewRef,
 } from '~/components/primitives/types';
-import * as React from 'react';
-import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import type {
-  TooltipOverlayProps,
-  TooltipPortalProps,
-  TooltipRootProps,
-  TooltipTriggerRef,
-} from './types';
 
 const RootContext = React.createContext<{
   open: boolean;
@@ -47,14 +49,12 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TooltipRootProps>(
         <Tooltip.Provider
           delayDuration={delayDuration}
           skipDelayDuration={skipDelayDuration}
-          disableHoverableContent={disableHoverableContent}
-        >
+          disableHoverableContent={disableHoverableContent}>
           <Tooltip.Root
             open={open}
             onOpenChange={onOpenChange}
             delayDuration={delayDuration}
-            disableHoverableContent={disableHoverableContent}
-          >
+            disableHoverableContent={disableHoverableContent}>
             <Component ref={ref} {...viewProps} />
           </Tooltip.Root>
         </Tooltip.Provider>
@@ -108,7 +108,7 @@ const Trigger = React.forwardRef<TooltipTriggerRef, SlottablePressableProps>(
         <Component
           ref={augmentedRef}
           onPress={onPress}
-          role='button'
+          role="button"
           disabled={disabled}
           {...props}
         />
@@ -166,8 +166,7 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
         alignOffset={alignOffset}
         avoidCollisions={avoidCollisions}
         sticky={sticky}
-        hideWhenDetached={hideWhenDetached}
-      >
+        hideWhenDetached={hideWhenDetached}>
         <Component ref={ref} {...props} />
       </Tooltip.Content>
     );

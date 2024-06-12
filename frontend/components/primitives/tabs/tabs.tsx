@@ -1,8 +1,14 @@
 import * as React from 'react';
 import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import * as Slot from '~/components/primitives/slot';
-import type { ComponentPropsWithAsChild, SlottableViewProps, ViewRef } from '~/components/primitives/types';
+
 import type { TabsContentProps, TabsRootProps } from './types';
+
+import * as Slot from '~/components/primitives/slot';
+import type {
+  ComponentPropsWithAsChild,
+  SlottableViewProps,
+  ViewRef,
+} from '~/components/primitives/types';
 
 interface RootContext extends TabsRootProps {
   nativeID: string;
@@ -31,8 +37,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TabsRootProps>(
           value,
           onValueChange,
           nativeID,
-        }}
-      >
+        }}>
         <Component ref={ref} {...viewProps} />
       </TabsContext.Provider>
     );
@@ -51,7 +56,7 @@ function useRootContext() {
 
 const List = React.forwardRef<ViewRef, SlottableViewProps>(({ asChild, ...props }, ref) => {
   const Component = asChild ? Slot.View : View;
-  return <Component ref={ref} role='tablist' {...props} />;
+  return <Component ref={ref} role="tablist" {...props} />;
 });
 
 List.displayName = 'ListNativeTabs';
@@ -80,7 +85,7 @@ const Trigger = React.forwardRef<
         nativeID={`${nativeID}-tab-${tabValue}`}
         aria-disabled={!!disabled}
         aria-selected={rootValue === tabValue}
-        role='tab'
+        role="tab"
         onPress={onPress}
         accessibilityState={{
           selected: rootValue === tabValue,
@@ -121,7 +126,7 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & TabsContentProps>
         ref={ref}
         aria-hidden={!(forceMount || rootValue === tabValue)}
         aria-labelledby={`${nativeID}-tab-${tabValue}`}
-        role='tabpanel'
+        role="tabpanel"
         {...props}
       />
     );
