@@ -33,7 +33,7 @@ const TableBody = React.forwardRef<
 >(({ className, style, ...props }, ref) => (
   <TablePrimitive.Body
     ref={ref}
-    className={cn('flex-1 border-border [&_tr:last-child]:border-0', className)}
+    className={cn('flex border-border [&_tr:last-child]:border-0', className)}
     style={[{ minHeight: 2 }, style]}
     {...props}
   />
