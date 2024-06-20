@@ -12,6 +12,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          href: null,
           title: 'Tab One',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerShown: false,
@@ -20,13 +21,6 @@ export default function TabLayout() {
               <HeaderButton />
             </Link>
           ),
-        }}
-      />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
     </Tabs>
