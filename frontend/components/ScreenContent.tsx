@@ -4,6 +4,7 @@ import { Pressable, ScrollView, View } from 'react-native';
 
 import { Button } from './Button';
 import { LineGraph } from './LineGraph';
+import PollenView from './PollenView';
 import { Avatar } from './ui/avatar';
 import { Card } from './ui/card';
 import { Separator } from './ui/separator';
@@ -54,7 +55,9 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
               </View>
             </View>
             <View className="w-1/2 flex-row justify-between pl-1">
-              <Card className="h-full w-full" />
+              <Card className="h-full w-full">
+                <PollenView />
+              </Card>
             </View>
           </View>
         </View>
