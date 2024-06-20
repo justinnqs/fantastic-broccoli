@@ -3,16 +3,21 @@
 from config import OPENAI_API_KEY
 from openai import OpenAI
 
-client = OpenAI(api_key=OPENAI_API_KEY)
 import gradio
 
-
-
 client = OpenAI(api_key=OPENAI_API_KEY)
 
+
 GPT_MODEL = "gpt-3.5-turbo-0125" #"gpt-3.5-turbo-1106"
-messages = [
-        {"role": "system", "content": "You are an allergist"},
+
+def chat_with_gpt():
+    print("ChatGPT Terminal Interface")
+    print("Type 'exit' to quit.")
+
+    # Start a conversation session with ChatGPT
+    session_prompt = "You are an allergist"
+    messages = [
+        {"role": "system", "content": session_prompt},
         {"role": "user", "content": 'I am having a stuff noise what should I do'},
         {
       "role": "system",
@@ -87,15 +92,36 @@ messages = [
       ]
     }
     ]
-response = client.chat.completions.create(
-        model=GPT_MODEL,
-        messages=messages,
-        # temperature=0
-        temperature=1,
-        max_tokens=150,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0
+
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == 'exit':
+            break
+
+        messages.append({"role": "user", "content": user_input})
+
+        #  ChatGPT response
+        try:
+            response = client.chat.completions.create(
+            model=GPT_MODEL,
+            messages=messages,
+            # temperature=0
+            temperature=0.5,
+            max_tokens=60,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
     )
-response_message = response.choices[0].message.content
-print(response_message )
+
+            chat_response = response.choices[0].message.content
+            if len(chat_response) > 300:
+                chat_response = chat_response[:300]  # Truncate to 300 characters
+            print("ChatGPT:", chat_response)
+
+            # Append model's response to messages to maintain context
+            messages.append({"role": "assistant", "content": chat_response})
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    chat_with_gpt()
