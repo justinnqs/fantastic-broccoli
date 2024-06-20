@@ -1,6 +1,8 @@
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
+import React from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 
+import { Button } from './Button';
 import { LineGraph } from './LineGraph';
 import { Avatar } from './ui/avatar';
 import { Card } from './ui/card';
@@ -44,10 +46,10 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
           </View>
           <View className="w-full flex-row">
             <View className="w-1/2 flex-col pr-1">
-              <View className="h-64 w-full flex-row pb-2">
+              <View className="h-56 w-full flex-row pb-2">
                 <Card className="h-full w-full" />
               </View>
-              <View className="h-64 w-full flex-row">
+              <View className="h-56 w-full flex-row">
                 <Card className="h-full w-full" />
               </View>
             </View>
@@ -56,6 +58,13 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
             </View>
           </View>
         </View>
+      </View>
+      <View className="absolute -bottom-4 right-0 aspect-square h-20 rounded-full border-2 bg-black opacity-80">
+        <Button
+          title=""
+          className="aspect-square h-full w-full rounded-full"
+          onPress={() => router.replace('/MessageScreen')}
+        />
       </View>
     </ScrollView>
   );
