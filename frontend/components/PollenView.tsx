@@ -24,14 +24,15 @@ const PollenCircle: React.FC<PollenCircleProps> = ({ size, color, label, isCente
 
   const circleStyles = [
     'absolute',
+    'aspect-square',
     'rounded-full',
     'justify-center',
     'items-center',
     `w-${size}`,
     `h-${size}`,
     `bg-${color}-800`,
-    !isCenter && `top-[50%]`,
-    !isCenter && `left-[70%]`,
+    !isCenter && `top-[${randomPosition.top}%]`,
+    !isCenter && `left-[${randomPosition.left}%]`,
     isCenter && 'top-1/2',
     isCenter && 'left-1/2',
     isCenter && '-translate-x-1/2',
