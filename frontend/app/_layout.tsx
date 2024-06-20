@@ -26,7 +26,7 @@ const DARK_THEME: Theme = {
 
 export {
   // Catch any errors thrown by the Layout component.
-  ErrorBoundary
+  ErrorBoundary,
 } from 'expo-router';
 
 // Prevent the splash screen from auto-hiding before getting the color scheme.
@@ -70,10 +70,9 @@ export default function RootLayout() {
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
       <Stack>
-        <Stack.Screen name={"MessageScreen"}/>
-        <Stack.Screen name = {"index"}/>
+        <Stack.Screen name="MessageScreen" />
+        <Stack.Screen name="index" />
       </Stack>
-      
     </ThemeProvider>
   );
 }

@@ -1,5 +1,5 @@
-import { ScrollView, View,  Pressable, Text } from 'react-native';
-import { Link } from "expo-router";
+import { Link } from 'expo-router';
+import { ScrollView, View, Pressable, Text } from 'react-native';
 
 import { AllergenView } from './AllergenView';
 import { Separator } from './ui/separator';
@@ -23,9 +23,9 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
           <Separator />
           <AllergenView />
           <Link href="/MessageScreen" asChild>
-              <Pressable>
-                <Text>Chat</Text>
-              </Pressable>
+            <Pressable>
+              <Text>Chat</Text>
+            </Pressable>
           </Link>
         </View>
       </ScrollView>
