@@ -6,9 +6,9 @@ import { View } from '~/components/primitives/slot';
 export default function Home() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Tab One' }} />
+      <Stack.Screen options={{ title: 'Home' }} />
       <View className="">
-        <ScreenContent path="app/(tabs)/index.tsx" title="Tab One" />
+        <ScreenContent path="app/(tabs)/index.tsx" title="Home" />
       </View>
     </>
   );

@@ -5,14 +5,9 @@ import { Theme, ThemeProvider } from '@react-navigation/native';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform } from 'react-native';
 
-import { Button } from '~/components/ui/button';
-import { Separator } from '~/components/ui/separator';
 import { NAV_THEME } from '~/lib/constants';
-import { ArrowLeft } from '~/lib/icons/ArrowLeft';
-import { Bell } from '~/lib/icons/Bell';
-import { User } from '~/lib/icons/User';
 import { useColorScheme } from '~/lib/useColorScheme';
 
 const LIGHT_THEME: Theme = {
@@ -70,8 +65,8 @@ export default function RootLayout() {
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
       <Stack>
-        <Stack.Screen name="MessageScreen" />
         <Stack.Screen name="index" />
+        <Stack.Screen name="MessageScreen" />
       </Stack>
     </ThemeProvider>
   );
