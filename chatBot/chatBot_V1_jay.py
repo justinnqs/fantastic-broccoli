@@ -98,27 +98,23 @@ def chat_with_gpt():
         if user_input.lower() == 'exit':
             break
 
-        messages.append({"role": "user", "content": user_input})
+        # summarization request to each user input
+        summary_request = "Summarize your response in about 300 characters."
+        messages.append({"role": "user", "content": user_input + " " + summary_request})
 
-        #  ChatGPT response
         try:
             response = client.chat.completions.create(
-            model=GPT_MODEL,
-            messages=messages,
-            # temperature=0
-            temperature=0.5,
-            max_tokens=60,
-            top_p=1,
-            frequency_penalty=0,
-            presence_penalty=0
-    )
+                model=GPT_MODEL,
+                messages=messages,
+                temperature=0.5,
+                max_tokens=100,  # Adjusted to allow for a slightly longer input to include the summarization instruction
+                top_p=1,
+                frequency_penalty=0,
+                presence_penalty=0
+            )
 
             chat_response = response.choices[0].message.content
-            if len(chat_response) > 300:
-                chat_response = chat_response[:300]  # Truncate to 300 characters
             print("ChatGPT:", chat_response)
-
-            # Append model's response to messages to maintain context
             messages.append({"role": "assistant", "content": chat_response})
         except Exception as e:
             print(f"An error occurred: {e}")
