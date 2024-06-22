@@ -1,13 +1,3 @@
-import { useAugmentedRef, useRelativePosition, type LayoutPosition } from '~/components/primitives/hooks';
-import { Portal as RNPPortal } from '~/components/primitives/portal';
-import * as Slot from '~/components/primitives/slot';
-import type {
-  PositionedContentProps,
-  PressableRef,
-  SlottablePressableProps,
-  SlottableViewProps,
-  ViewRef,
-} from '~/components/primitives/types';
 import * as React from 'react';
 import {
   BackHandler,
@@ -17,12 +7,28 @@ import {
   type LayoutChangeEvent,
   type LayoutRectangle,
 } from 'react-native';
+
 import type {
   TooltipOverlayProps,
   TooltipPortalProps,
   TooltipRootProps,
   TooltipTriggerRef,
 } from './types';
+
+import {
+  useAugmentedRef,
+  useRelativePosition,
+  type LayoutPosition,
+} from '~/components/primitives/hooks';
+import { Portal as RNPPortal } from '~/components/primitives/portal';
+import * as Slot from '~/components/primitives/slot';
+import type {
+  PositionedContentProps,
+  PressableRef,
+  SlottablePressableProps,
+  SlottableViewProps,
+  ViewRef,
+} from '~/components/primitives/types';
 
 interface IRootContext {
   open: boolean;
@@ -69,8 +75,7 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TooltipRootProps>(
           setContentLayout,
           setTriggerPosition,
           triggerPosition,
-        }}
-      >
+        }}>
         <Component ref={ref} {...viewProps} />
       </RootContext.Provider>
     );
@@ -97,7 +102,7 @@ const Trigger = React.forwardRef<TooltipTriggerRef, SlottablePressableProps>(
         open: () => {
           onOpenChange(true);
           augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
-            setTriggerPosition({ width, pageX, pageY: pageY, height });
+            setTriggerPosition({ width, pageX, pageY, height });
           });
         },
         close: () => {
@@ -110,7 +115,7 @@ const Trigger = React.forwardRef<TooltipTriggerRef, SlottablePressableProps>(
     function onPress(ev: GestureResponderEvent) {
       if (disabled) return;
       augmentedRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
-        setTriggerPosition({ width, pageX, pageY: pageY, height });
+        setTriggerPosition({ width, pageX, pageY, height });
       });
       const newValue = !open;
       onOpenChange(newValue);
@@ -122,7 +127,7 @@ const Trigger = React.forwardRef<TooltipTriggerRef, SlottablePressableProps>(
       <Component
         ref={augmentedRef}
         aria-disabled={disabled ?? undefined}
-        role='button'
+        role="button"
         onPress={onPress}
         disabled={disabled ?? undefined}
         {...props}
@@ -254,9 +259,9 @@ const Content = React.forwardRef<ViewRef, SlottableViewProps & PositionedContent
     return (
       <Component
         ref={ref}
-        role='tooltip'
+        role="tooltip"
         nativeID={nativeID}
-        aria-modal={true}
+        aria-modal
         style={[positionStyle, style]}
         onLayout={onLayout}
         onStartShouldSetResponder={onStartShouldSetResponder}

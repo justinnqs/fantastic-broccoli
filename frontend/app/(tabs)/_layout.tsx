@@ -1,4 +1,5 @@
 import { Link, Tabs } from 'expo-router';
+import React from 'react';
 
 import { HeaderButton } from '../../components/HeaderButton';
 import { TabBarIcon } from '../../components/TabBarIcon';

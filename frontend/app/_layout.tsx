@@ -64,8 +64,11 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <Stack>
-        <Stack.Screen name="index" />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="SummaryScreen" />
         <Stack.Screen name="MessageScreen" />
       </Stack>
     </ThemeProvider>

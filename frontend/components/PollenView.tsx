@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text } from 'react-native';
 import 'nativewind';
+import React from 'react';
+import { Text, View } from 'react-native';
 
 // Function to generate random positions for circles
 const getRandomPosition = () => {
@@ -31,12 +31,12 @@ const PollenCircle: React.FC<PollenCircleProps> = ({ size, color, label, isCente
     `w-${size}`,
     `h-${size}`,
     `bg-${color}-800`,
-    !isCenter && `top-[${randomPosition.top}%]`,
-    !isCenter && `left-[${randomPosition.left}%]`,
+    // !isCenter && `top-[${randomPosition.top}%]`,
+    // !isCenter && `left-[${randomPosition.left}%]`,
     isCenter && 'top-1/2',
     isCenter && 'left-1/2',
-    isCenter && '-translate-x-1/2',
-    isCenter && '-translate-y-1/2',
+    // isCenter && '-translate-x-1/2',
+    // isCenter && '-translate-y-1/2',
   ]
     .filter(Boolean)
     .join(' ');

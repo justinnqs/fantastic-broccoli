@@ -1,9 +1,15 @@
 import * as Tabs from '@radix-ui/react-tabs';
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
-import * as Slot from '~/components/primitives/slot';
-import type { ComponentPropsWithAsChild, SlottableViewProps, ViewRef } from '~/components/primitives/types';
+
 import type { TabsContentProps, TabsRootProps } from './types';
+
+import * as Slot from '~/components/primitives/slot';
+import type {
+  ComponentPropsWithAsChild,
+  SlottableViewProps,
+  ViewRef,
+} from '~/components/primitives/types';
 
 const TabsContext = React.createContext<TabsRootProps | null>(null);
 const Root = React.forwardRef<ViewRef, SlottableViewProps & TabsRootProps>(
@@ -14,16 +20,14 @@ const Root = React.forwardRef<ViewRef, SlottableViewProps & TabsRootProps>(
         value={{
           value,
           onValueChange,
-        }}
-      >
+        }}>
         <Tabs.Root
           value={value}
           onValueChange={onValueChange}
           orientation={orientation}
           dir={dir}
           activationMode={activationMode}
-          asChild
-        >
+          asChild>
           <Component ref={ref} {...viewProps} />
         </Tabs.Root>
       </TabsContext.Provider>

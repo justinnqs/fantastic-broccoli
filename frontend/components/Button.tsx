@@ -1,17 +1,19 @@
-import React, { forwardRef } from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 
 interface ButtonProps extends TouchableOpacityProps {
   onPress?: () => void;
-  title: string;
-  className: string;
+  title?: string;
+  className?: string;
+  children?: ReactNode;
 }
 
 export const Button = forwardRef<TouchableOpacity, ButtonProps>(
-  ({ onPress, title, className = styles.button }, ref) => {
+  ({ onPress, title, className = styles.button, children }, ref) => {
     return (
       <TouchableOpacity ref={ref} className={className} onPress={onPress}>
-        <Text className={styles.buttonText}>{title}</Text>
+        {title && <Text className={styles.buttonText}>{title}</Text>}
+        {children}
       </TouchableOpacity>
     );
   }
