@@ -1,6 +1,6 @@
 import { Link, router } from 'expo-router';
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 
 import { Button } from './Button';
 import { LineGraph } from './LineGraphGiftedCharts';
@@ -23,7 +23,7 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
   return (
     <>
       <MessageScreen />
-      <View className="flex flex-1 p-4">
+      <ScrollView className="flex flex-1 p-4">
         <View className="flex-1 gap-4">
           <View className="mb-10 flex-row border-t border-gray-300 p-3" />
           <View className="flex flex-row items-center justify-between">
@@ -44,11 +44,12 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
             <View className="h-80 w-full flex-row justify-between">
               <LineGraph />
             </View>
+            <View className="h-80 w-full flex-row justify-between">
+              <PollenView />
+            </View>
             <View className="w-full flex-row">
               <View className="w-1/2 flex-row justify-between pr-1">
-                <Card className="h-full w-full">
-                  <PollenView />
-                </Card>
+                <Card className="h-full w-full" />
               </View>
               <View className="w-1/2 flex-col pl-1">
                 <View className="h-56 w-full flex-row pb-2">
@@ -69,7 +70,7 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
             <MessageSquare color="black" height={55} className="aspect-square" />
           </Button>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 };
