@@ -2,14 +2,10 @@ import 'nativewind';
 import React from 'react';
 import { Text, View } from 'react-native';
 
-// Function to generate random positions for circles
-const getRandomPosition = () => {
-  const min = 0;
-  const max = 100;
-  return {
-    top: Math.floor(Math.random() * (max - min + 1)) + min,
-    left: Math.floor(Math.random() * (max - min + 1)) + min,
-  };
+import { H1 } from './ui/typography';
+
+const getMaxRadius = (ratio: number): number => {
+  return 2 ** 0.5 / (2 * (1 + ratio * (1 + 2 ** 0.5)));
 };
 
 interface PollenCircleProps {
@@ -19,24 +15,47 @@ interface PollenCircleProps {
   isCenter?: boolean;
 }
 
-const PollenCircle: React.FC<PollenCircleProps> = ({ size, color, label, isCenter = false }) => {
-  const randomPosition = getRandomPosition();
-
+const PollenCircle: React.FC<PollenCircleProps> = ({ radius, color, label, index, maxRadius }) => {
+  let topPos = 0;
+  let leftPos = 0;
+  if (index == 0) {
+    topPos = 0.5 - radius;
+    leftPos = 0.5 - radius;
+  }
+  if (index == 1) {
+    topPos = 1 - 2 * radius;
+    leftPos = 1 - 2 * radius;
+  }
+  if (index == 2) {
+    topPos = 0;
+    leftPos = 0;
+  }
+  if (index == 3) {
+    topPos = 0;
+    leftPos = 1 - 2 * radius;
+  }
+  if (index == 4) {
+    topPos = 1 - 2 * radius;
+    leftPos = 0;
+  }
+  // if(key == 2 ) {
+  //   topPos = .5 +  (radius+ maxRadius) / (2 ** .5) - radius
+  //   leftPos = .5 +  (radius+ maxRadius) / (2 ** .5) - radius
+  // }
+  const top = Math.floor(topPos * 100.0);
+  const left = Math.floor(leftPos * 100.0);
+  const diameter = Math.floor(radius * 100 * 2);
   const circleStyles = [
     'absolute',
     'aspect-square',
     'rounded-full',
     'justify-center',
     'items-center',
-    `w-${size}`,
-    `h-${size}`,
+    `w-[${diameter}%]`,
+    `h-[${diameter}%]`,
     `bg-${color}-800`,
-    // !isCenter && `top-[${randomPosition.top}%]`,
-    // !isCenter && `left-[${randomPosition.left}%]`,
-    isCenter && 'top-1/2',
-    isCenter && 'left-1/2',
-    // isCenter && '-translate-x-1/2',
-    // isCenter && '-translate-y-1/2',
+    `top-[${top}%]`,
+    `left-[${left}%]`,
   ]
     .filter(Boolean)
     .join(' ');
@@ -61,23 +80,23 @@ interface PollenDisplayProps {
 const PollenDisplay: React.FC<PollenDisplayProps> = ({ pollenData }) => {
   // Sort pollen data to ensure the largest circle is in the middle
   const sortedPollenData = [...pollenData].sort((a, b) => b.amount - a.amount);
-  const largestPollen = sortedPollenData[0];
+  const radiusRatios = sortedPollenData.map(
+    (elem) => (elem.amount / sortedPollenData[0].amount) ** 0.5
+  );
+  const largestRadius = getMaxRadius(radiusRatios[1]);
+  console.log('Rendering circles');
 
   return (
     <View className="flex-1 items-center justify-center bg-white p-4">
       <View className="relative h-80 w-80">
-        <PollenCircle
-          size={largestPollen.amount}
-          color={largestPollen.color}
-          label={largestPollen.label}
-          isCenter
-        />
-        {sortedPollenData.slice(1).map((pollen, index) => (
+        {sortedPollenData.map((pollen, index) => (
           <PollenCircle
             key={index}
-            size={pollen.amount}
+            index={index}
+            radius={radiusRatios[index] * largestRadius}
             color={pollen.color}
             label={pollen.label}
+            maxRadius={largestRadius}
           />
         ))}
       </View>
@@ -88,9 +107,10 @@ const PollenDisplay: React.FC<PollenDisplayProps> = ({ pollenData }) => {
 const PollenView: React.FC = () => {
   const pollenData: PollenData[] = [
     { label: 'Tree Pollen', amount: 40, color: 'red' },
-    { label: 'Grass Pollen', amount: 70, color: 'yellow' },
-    // { label: 'Weed Pollen', amount: 72, color: 'green' },
-    // { label: 'Flower Pollen', amount: 48, color: 'blue' },
+    { label: 'Grass Pollen', amount: 30, color: 'yellow' },
+    { label: 'Weed Pollen', amount: 45, color: 'green' },
+    { label: 'Flower Pollen', amount: 55, color: 'blue' },
+    { label: 'Other Pollen', amount: 50, color: 'orange' },
   ];
 
   return <PollenDisplay pollenData={pollenData} />;
