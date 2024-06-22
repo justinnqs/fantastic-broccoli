@@ -8,16 +8,6 @@ const getMaxRadius = (ratio: number): number => {
   return 2 ** 0.5 / (2 * (1 + ratio * (1 + 2 ** 0.5)));
 };
 
-// Function to generate random positions for circles
-const getRandomPosition = () => {
-  const min = 0;
-  const max = 20;
-  return {
-    top: Math.floor(Math.random() * (max - min + 1)) + min,
-    left: Math.floor(Math.random() * (max - min + 1)) + min,
-  };
-};
-
 interface PollenCircleProps {
   size: number;
   color: string;
@@ -26,8 +16,6 @@ interface PollenCircleProps {
 }
 
 const PollenCircle: React.FC<PollenCircleProps> = ({ radius, color, label, index, maxRadius }) => {
-  const randomPosition = getRandomPosition();
-  console.log(label);
   let topPos = 0;
   let leftPos = 0;
   if (index == 0) {
@@ -54,15 +42,9 @@ const PollenCircle: React.FC<PollenCircleProps> = ({ radius, color, label, index
   //   topPos = .5 +  (radius+ maxRadius) / (2 ** .5) - radius
   //   leftPos = .5 +  (radius+ maxRadius) / (2 ** .5) - radius
   // }
-
-  console.log(index);
   const top = Math.floor(topPos * 100.0);
   const left = Math.floor(leftPos * 100.0);
   const diameter = Math.floor(radius * 100 * 2);
-  console.log(diameter);
-  console.log(top);
-  console.log(left);
-
   const circleStyles = [
     'absolute',
     'aspect-square',
