@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from chatBot_Flask_V1 import get_chat_response  # Make sure to import your modified chat function
+from chatBot_Flask_V1 import get_chat_response 
 
 app = Flask(__name__)
 
