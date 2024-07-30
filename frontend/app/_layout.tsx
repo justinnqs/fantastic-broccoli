@@ -16,7 +16,6 @@ const CLERK_PUBLISHABLE_KEY =
   "pk_test_YXBwYXJlbnQtY2hpbXAtOC5jbGVyay5hY2NvdW50cy5kZXYk";
 const queryClient = new QueryClient();
 
-console.log(process.env);
 // Cache the Clerk JWT
 const tokenCache = {
   async getToken(key: string) {
@@ -64,6 +63,11 @@ const InitialLayout = () => {
   }, [loaded]);
 
   useEffect(() => {
+    if (true) {
+      router.replace("/(authenticated)/(tabs)/home");
+      return;
+    }
+
     if (!isLoaded) return;
 
     const inAuthGroup = segments[0] === "(authenticated)";
@@ -188,6 +192,22 @@ const InitialLayout = () => {
           animation: "fade",
           title: "",
           headerTransparent: true,
+          headerLeft: () => (
+            <TouchableOpacity onPress={router.back}>
+              <Ionicons name="close-outline" size={34} color={"#fff"} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="(authenticated)/(modals)/chat"
+        options={{
+          presentation: "transparentModal",
+          animation: "slide_from_bottom",
+          title: "",
+          headerTransparent: true,
+          gestureEnabled: true,
+          gestureDirection: "vertical",
           headerLeft: () => (
             <TouchableOpacity onPress={router.back}>
               <Ionicons name="close-outline" size={34} color={"#fff"} />
