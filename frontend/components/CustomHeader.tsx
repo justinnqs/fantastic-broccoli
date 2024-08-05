@@ -42,7 +42,7 @@ const CustomHeader = () => {
         <View style={styles.searchSection}>
           <Ionicons
             style={styles.searchIcon}
-            name="search"
+            name="sparkles"
             size={20}
             color={Colors.dark}
           />

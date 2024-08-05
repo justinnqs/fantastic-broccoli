@@ -105,7 +105,7 @@ const Page = () => {
         <View style={styles.row}>
           <View style={styles.col}>
             <Text style={styles.balance}>Hello,</Text>
-            <Text style={styles.balance}>Saul Goodman</Text>
+            <Text style={styles.balance}>Boyan Hadjiev</Text>
           </View>
           <TouchableOpacity style={styles.captureBtn}>
             {user?.imageUrl && (
