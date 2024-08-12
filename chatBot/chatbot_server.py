@@ -14,7 +14,7 @@ def chat():
         response = get_chat_response(user_message)
         return jsonify({'response': response})
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return "Offline at the moment, please ask again later", 200
 
 if __name__ == '__main__':
     app.run(debug=True)
