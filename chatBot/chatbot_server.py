@@ -12,7 +12,7 @@ def chat():
     user_message = data['message']
     try:
         response = get_chat_response(user_message)
-        return jsonify({'response': response})
+        return jsonify({'response': response})  
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
