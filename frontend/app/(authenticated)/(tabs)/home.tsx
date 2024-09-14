@@ -105,12 +105,10 @@ const Page = () => {
         <View style={styles.row}>
           <View style={styles.col}>
             <Text style={styles.balance}>Hello,</Text>
-            <Text style={styles.balance}>Boyan Hadjiev</Text>
+            <Text style={styles.balance}>A Rocky Rock</Text>
           </View>
           <TouchableOpacity style={styles.captureBtn}>
-            {user?.imageUrl && (
-              <Image source={{ uri: user?.imageUrl }} style={styles.avatar} />
-            )}
+            <Image source={require('@/assets/images/Dwayne__The_Rock__Johnson_Visits_the_Pentagon_(41)_(cropped).jpg')} style={styles.avatar} />
           </TouchableOpacity>
         </View>
       </View>
