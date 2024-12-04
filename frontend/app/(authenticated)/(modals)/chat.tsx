@@ -9,19 +9,53 @@ import {
   View,
 } from "react-native";
 
+
 const Page = () => {
-  const [messages, setMessages] = useState<Array<{ id: string; text: string }>>(
+  const [messages, setMessages] = useState<Array<{ id: string; text: string, type: "user" | "ai" }>>(
     []
   );
+
   const [inputText, setInputText] = useState("");
 
   const handleSend = () => {
     if (inputText.trim()) {
       setMessages([
         ...messages,
-        { id: messages.length.toString(), text: inputText },
+        { id: messages.length.toString(), text: inputText, type: "user" },
       ]);
       setInputText("");
+      handleReceive(inputText.trim())
+    }
+  };
+
+  const handleReceive = async (userText: string) => {
+    try {
+      // Send POST request to the Flask server
+      const response = await fetch("http://127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userText }),
+      });
+
+      if (response.ok) {
+        const data = await response.json;
+        console.log(data)
+        const aiMessage = data.body;
+
+        setMessages([
+          ...messages,
+          { id: messages.length.toString(), text: userText, type: "user" },
+          { id: "ai" + messages.length.toString(), text: aiMessage, type: "ai" },
+        ]);
+      } else {
+        // Handle server error
+        console.error("Server error:", response.statusText);
+      }
+    } catch (error) {
+      // Handle network error
+      console.error("Network error:", error);
     }
   };
 
@@ -30,8 +64,12 @@ const Page = () => {
       <View style={styles.container}>
         <FlatList
           data={messages}
-          renderItem={({ item }) => (
+          renderItem={({ item }) => item.type == "user" ? (
             <View style={styles.message}>
+              <Text>{item.text}</Text>
+            </View>
+          ): (
+            <View style={styles.aimessage}>
               <Text>{item.text}</Text>
             </View>
           )}
@@ -66,12 +104,19 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     margin: 10,
   },
-  message: {
+  aimessage: {
     padding: 10,
     backgroundColor: "#f0f0f0",
     borderRadius: 5,
     marginVertical: 5,
     alignSelf: "flex-start",
+  },
+  message: {
+    padding: 10,
+    backgroundColor: "blue",
+    borderRadius: 5,
+    marginVertical: 5,
+    alignSelf: "flex-end",
   },
   inputContainer: {
     flexDirection: "row",
